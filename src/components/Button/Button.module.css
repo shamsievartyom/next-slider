@@ -1,0 +1,23 @@
+.button {
+    padding: 12px 0;
+    display: flex;
+    justify-content: start;
+    width: 344px;
+    margin: 0;
+    border: none;
+    background: inherit;
+    cursor: pointer; 
+    background-origin: content-box;
+}
+
+.button_rigth {
+    justify-content: end;
+}
+
+.button :hover {
+    background-color: rgba(1, 1, 1, 0.05);
+}
+
+.button :active {
+    background-color: rgba(1, 1, 1, 0.1);
+}
