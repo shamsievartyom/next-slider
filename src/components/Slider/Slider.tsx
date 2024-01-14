@@ -1,5 +1,5 @@
 'use client'
-import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { FC, useLayoutEffect, useRef } from 'react'
 import styles from './Slider.module.css'
 import Slide from './Slide/Slide'
 import Button from '../Button/Button'
