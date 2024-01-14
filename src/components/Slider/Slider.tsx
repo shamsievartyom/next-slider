@@ -26,10 +26,8 @@ const Slider: FC<SliderProps> = ({ data }) => {
         let currentSum = 0;
         if (sliderRef.current) {
             Array.prototype.slice.call(sliderRef.current.children).forEach((el) => {
-                console.log(el.clientWidth)
                 currentSum += el.clientWidth
                 slidesPositionList.push(currentSum)
-                console.log(slidesPositionList)
             });
         }
     }, [])
