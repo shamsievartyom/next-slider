@@ -8,7 +8,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: FC<ButtonProps> = ({ side, ...args }) => {
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const hasWindow = typeof window !== 'undefined';
+    const [windowWidth, setWindowWidth] = useState(hasWindow ? window.innerWidth : 0);
 
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth);
