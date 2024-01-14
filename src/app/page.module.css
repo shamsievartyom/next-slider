@@ -11,7 +11,7 @@
   flex-direction: column;
   gap: 57px;
   width: 100%;
-  align-items: center;
+  max-width: 1376px;
 }
 
 .section_text_container {
