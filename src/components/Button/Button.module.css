@@ -1,7 +1,7 @@
 .button {
     padding: 12px 0;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     width: 344px;
     margin: 0;
     border: none;
@@ -11,13 +11,5 @@
 }
 
 .button_rigth {
-    justify-content: end;
-}
-
-.button :hover {
-    background-color: rgba(1, 1, 1, 0.05);
-}
-
-.button :active {
-    background-color: rgba(1, 1, 1, 0.1);
+    justify-content: flex-end;
 }

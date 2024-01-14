@@ -4,7 +4,7 @@ import styles from './Slide.module.css'
 import Image from 'next/image'
 
 interface SlideProps {
-    type: 0 | 1 | 2 | 3 | 4,
+    type: number,
     title: string,
     img: string,
     date: string,

@@ -1,12 +1,12 @@
 'use client'
-import React, { FC, useRef } from 'react'
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './Slider.module.css'
 import Slide from './Slide/Slide'
 import Button from '../Button/Button'
 
 interface mockData {
     id: number,
-    types: string,
+    types: number,
     img: string,
     title: string,
     date: string,
@@ -18,20 +18,28 @@ interface SliderProps {
 
 const Slider: FC<SliderProps> = ({ data }) => {
 
-    //create array of start point (coordinate) for slide in slider 
-    let currentSum = 0;
-    const slidesPositionList: number[] = [0]
-    data.forEach((el) => {
-        currentSum += el.title.length <= 35 ? 344 : 688;
-        slidesPositionList.push(currentSum);
-    });
-
     const sliderRef = useRef<HTMLDivElement>(null)
+
+    //create array of start point (coordinate) for slide in slider 
+    const slidesPositionList = [0]
+    useLayoutEffect(() => {
+        let currentSum = 0;
+        if (sliderRef.current) {
+            Array.prototype.slice.call(sliderRef.current.children).forEach((el) => {
+                console.log(el.clientWidth)
+                currentSum += el.clientWidth
+                slidesPositionList.push(currentSum)
+                console.log(slidesPositionList)
+            });
+        }
+    }, [])
+
+
 
     //find closest value from number array for x. Return value between x and finded value
     function findClosestValue(numbers: number[], x: number, comparison: 'more' | 'less'): number {
-        if (comparison === 'more') {
-            return numbers.reduce((prev, curr) => (curr > x && (prev === x || curr < prev) ? curr : prev), x) - x;
+        if (comparison === 'more') {//add + 1 for fix browser pixel rendering
+            return numbers.reduce((prev, curr) => (curr > x + 1 && (prev === x || curr < prev) ? curr : prev), x) - x;
         } else {
             return x - numbers.reduce((prev, curr) => (curr < x && (prev === x || curr > prev) ? curr : prev), x);
         }
@@ -57,18 +65,6 @@ const Slider: FC<SliderProps> = ({ data }) => {
             });
     }
 
-    let lastNumber: number | null = null;
-
-    //select random slide type exclude double type 0 in a row 
-    const getRandomNonRepeating = (): 0 | 1 | 2 | 3 => {
-        let randomNumber: number;
-        do {
-            randomNumber = Math.floor(Math.random() * 4);
-        } while (lastNumber === 0 && randomNumber === 0);
-
-        lastNumber = randomNumber;
-        return randomNumber as 0 | 1 | 2 | 3;
-    }
     return (
         <div className={styles.main_container}>
             <div ref={sliderRef} className={styles.slider_container}>
@@ -77,7 +73,7 @@ const Slider: FC<SliderProps> = ({ data }) => {
                         return (<Slide key={el.id} date={el.date} img={el.img} title={el.title} type={4} />)
                     }
                     else {
-                        return < Slide key={el.id} date={el.date} img={el.img} title={el.title} type={getRandomNonRepeating()} />
+                        return < Slide key={el.id} date={el.date} img={el.img} title={el.title} type={el.types} />
                     }
                 })}
             </div>
