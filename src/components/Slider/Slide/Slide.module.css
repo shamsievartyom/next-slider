@@ -6,6 +6,9 @@
     gap: 32px;
     padding-bottom: 28px;
     cursor: pointer;
+    &:hover .title {
+        color: #4FBA67;
+    }
 }
 
 .container_wide {
