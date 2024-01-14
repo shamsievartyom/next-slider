@@ -5,6 +5,7 @@
     width: 344px;
     gap: 32px;
     padding-bottom: 28px;
+    cursor: pointer;
 }
 
 .container_wide {
